@@ -10,6 +10,12 @@ import {
   CampoSenhaContainer,
   CampoSenha,
   IconeOlho,
+  ModalOverlay,
+  ModalBox,
+  ModalTitulo,
+  ModalTexto,
+  ModalBotao,
+  FecharModal,
 } from "../Style";
 import logo from "/logo.png";
 import olho from "/olho.png";
@@ -17,6 +23,9 @@ import { useState } from "react";
 
 function Login() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [modalAberto, setModalAberto] = useState(false);
+  const abrirModal = () => setModalAberto(true);
+  const fecharModal = () => setModalAberto(false);
 
   return (
     <>
@@ -47,7 +56,27 @@ function Login() {
         <LinkAmarelo to="/cadastro">aqui.</LinkAmarelo>
       </Texto>
 
-      <Botao>ENTRAR</Botao>
+      <Botao onClick={abrirModal}>ENTRAR</Botao>
+
+      {modalAberto && (
+        <ModalOverlay>
+          <ModalBox>
+            <FecharModal onClick={fecharModal}>×</FecharModal>
+            <ModalTitulo>Você deseja mesmo fazer login?</ModalTitulo>
+            <ModalTexto>
+              Tem certeza que você deseja fazer esse login?
+            </ModalTexto>
+            <ModalBotao
+              onClick={() => {
+                fecharModal();
+                console.log("Login confirmado");
+              }}
+            >
+              LOGIN
+            </ModalBotao>
+          </ModalBox>
+        </ModalOverlay>
+      )}
     </>
   );
 }

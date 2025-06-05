@@ -352,3 +352,65 @@ export const BotaoLoginTabela = styled.div`
   justify-content: flex-end;
   margin: 20px 0;
 `;
+
+export const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+`;
+
+export const ModalBox = styled.div`
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+`;
+
+export const ModalTitulo = styled.h2`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+export const ModalTexto = styled.p`
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 25px;
+`;
+
+export const ModalBotao = styled.button`
+  background-color: white;
+  border: 2px solid orange;
+  color: orange;
+  padding: 8px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: orange;
+    color: white;
+  }
+`;
+
+export const FecharModal = styled.button`
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+`;
