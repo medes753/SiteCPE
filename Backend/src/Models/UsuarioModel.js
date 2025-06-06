@@ -5,19 +5,21 @@ const SessoesModel = require("./SessoesModel");
 const Schema = mongoose.Schema;
 
 const UsuarioSchema = new Schema({
+  nome: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   email: {
     type: String,
     unique: true,
+    required: true,
   },
+  cargo: String,
   senha: {
     type: String,
     select: false,
   },
-  nome: {
-    type: String,
-    unique: true,
-  },
-  cargo: String,
   status: String,
 });
 
@@ -44,6 +46,5 @@ UsuarioSchema.pre(
   }
 );
 
-const UsarioModel = mongoose.model("usuarios", UsuarioSchema);
-
-module.exports = UsarioModel;
+const UsuarioModel = mongoose.model("usuarios", UsuarioSchema);
+module.exports = UsuarioModel;

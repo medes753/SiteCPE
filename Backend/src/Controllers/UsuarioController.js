@@ -1,13 +1,24 @@
 const UsuarioModel = require("../Models/UsuarioModel");
+const bcrypt = require("bcrypt");
 
 class UsuarioController {
   async create(req, res) {
     try {
-      const usuario = await UsuarioModel.create(req.body);
+      const { nome, email, senha, cargo, status } = req.body;
 
-      const { senha, ...novoUsuario } = usuario.toObject();
+      const senhaHash = await bcrypt.hash(senha, 10);
 
-      return res.status(200).json(novoUsuario);
+      const usuario = await UsuarioModel.create({
+        nome,
+        email,
+        senha: senhaHash,
+        cargo,
+        status,
+      });
+
+      const { senha: _, ...novoUsuario } = usuario.toObject();
+
+      return res.status(201).json(novoUsuario);
     } catch (error) {
       res
         .status(500)

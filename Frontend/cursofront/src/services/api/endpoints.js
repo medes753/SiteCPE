@@ -1,24 +1,40 @@
-import api from "./api";
+import axios from "axios";
 
-//Users
+const api = axios.create({
+  baseURL: "http://localhost:8000",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export default api;
+
 export async function GetUsers() {
-  const { data } = api.get(`/user`);
+  const token = localStorage.getItem("token");
+  const { data } = await api.get(`/usuarios`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return data;
 }
 
 export async function CreateUser(body) {
-  const { data } = api.post(`/user`, body);
+  const token = localStorage.getItem("token");
+  const { data } = await api.post(`/usuarios`, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return data;
 }
 
 export async function UpdateUser(id, body) {
-  const { data } = api.put(`/user:${id}`, body);
+  const { data } = await api.put(`/usuarios/${id}`, body);
   return data;
 }
 
 export async function DeleteUser(id) {
-  const { data } = api.delete(`/user:${id}`);
+  const { data } = await api.delete(`/usuarios/${id}`);
   return data;
 }
-
-//entidade 2
